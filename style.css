@@ -164,18 +164,7 @@ html, body {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
-  background: 
-    radial-gradient(120% 70% at 50% 0%, rgba(98, 110, 212, 0.22) 0%, rgba(98, 110, 212, 0.05) 45%, transparent 75%),
-    linear-gradient(155deg, #323950 0%, #292f42 35%, #242939 70%, #1c202d 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 1px solid rgba(255, 255, 255, 0.24);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   padding: 1.4vh 1.8vw 1.6vh 1.8vw;
-  box-shadow: 
-    0 1rem 3rem rgba(10, 12, 20, 0.65), 
-    0 0 50px rgba(98, 110, 212, 0.12),
-    inset 0 1px 2px rgba(255, 255, 255, 0.16);
   position: relative;
   overflow: hidden;
 }
@@ -187,7 +176,6 @@ html, body {
   position: relative;
   margin-bottom: 0.8vh;
   padding-bottom: 0.6vh;
-  border-bottom: 1px solid var(--border-subtle);
   flex-shrink: 0;
   gap: 0.4vh;
 }
@@ -345,10 +333,9 @@ html, body {
   font-size: clamp(1.8rem, 3.8vw, 6.5vh);
   font-weight: 700;
   font-family: var(--font-num);
-  color: var(--curr-unit-color);
+  color: #2D70BA;
   margin-left: clamp(0.6rem, 1.4vw, 2.2rem);
   transform: translateY(-0.6vh);
-  text-shadow: 0 0 15px rgba(2, 164, 153, 0.4);
 }
 
 .card-status-chip {
@@ -414,7 +401,7 @@ html, body {
 }
 
 .sub-card-hourly .sub-unit {
-  color: var(--hour-unit-color);
+  color: #4CA7A9;
 }
 
 .sub-card-hourly .card-status-chip {
@@ -463,7 +450,7 @@ html, body {
 }
 
 .sub-card-daily .sub-unit {
-  color: var(--day-unit-color);
+  color: #D45A69;
 }
 
 .sub-card-daily .card-status-chip {
@@ -509,18 +496,7 @@ html, body {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
-  background: 
-    radial-gradient(120% 70% at 50% 0%, rgba(98, 110, 212, 0.22) 0%, rgba(98, 110, 212, 0.05) 45%, transparent 75%),
-    linear-gradient(155deg, #323950 0%, #292f42 35%, #242939 70%, #1c202d 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 1px solid rgba(255, 255, 255, 0.24);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   padding: 1.4vh 1.8vw 1.6vh 1.8vw;
-  box-shadow: 
-    0 1rem 3rem rgba(10, 12, 20, 0.65), 
-    0 0 50px rgba(98, 110, 212, 0.12),
-    inset 0 1px 2px rgba(255, 255, 255, 0.16);
   position: relative;
   overflow: hidden;
 }
@@ -553,7 +529,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--bg-inner);
+  background: var(--hour-card-bg);
   border: 1px solid var(--border-outer);
   border-radius: 8px;
   padding: 0.9vh 1.4vw;
@@ -575,7 +551,7 @@ html, body {
 
 .custom-date-input {
   border: 1px solid var(--border-outer);
-  background: var(--bg-card);
+  background: var(--bg-inner);
   color: var(--text-title);
   font-family: var(--font-num);
   font-size: clamp(0.95rem, 1.15vw, 1.9vh);
@@ -584,7 +560,6 @@ html, body {
   border-radius: 6px;
   outline: none;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   transition: border-color 0.15s ease;
   color-scheme: dark;
 }
@@ -623,7 +598,6 @@ html, body {
   padding: 0.5rem 1.8rem;
   border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(2, 164, 153, 0.35);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -633,7 +607,6 @@ html, body {
 .btn-action-green:hover {
   filter: brightness(1.12);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(2, 164, 153, 0.45);
 }
 
 .btn-action-green:active {
@@ -650,7 +623,6 @@ html, body {
   padding: 0.5rem 1.8rem;
   border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(98, 110, 212, 0.35);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -660,7 +632,6 @@ html, body {
 .btn-action-download:hover {
   filter: brightness(1.12);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(98, 110, 212, 0.45);
 }
 
 .btn-action-download:active {
@@ -808,7 +779,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--bg-inner);
+  background: var(--hour-card-bg);
   border: 1px solid var(--border-outer);
   border-radius: 8px;
   padding: 0.9vh 1.4vw;
