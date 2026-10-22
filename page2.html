@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>데이터 추출</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/suit@2/fonts/variable/woff2/SUIT-Variable.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <main class="main-viewport">
+      <section class="page-view active" id="view-data">
+        <div class="page-content-card">
+          
+          <div class="page-header-row">
+            <h1 class="page-main-title">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              데이터 추출
+            </h1>
+          </div>
+
+          <div class="page2-control-bar">
+            <div class="date-picker-wrap">
+              <span class="date-label">조회 일자:</span>
+              <input type="date" id="datePicker" class="custom-date-input" value="2026-10-21">
+            </div>
+            <div class="control-btn-group">
+              <button class="btn-action-green" id="btnQuery">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                조회
+              </button>
+              <button class="btn-action-download" id="btnDownload">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                다운로드
+              </button>
+            </div>
+          </div>
+
+          <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 36%;">시간</th>
+                  <th style="width: 32%;">풍속</th>
+                  <th style="width: 32%;">돌풍풍속</th>
+                </tr>
+              </thead>
+              <tbody id="dataTableBody">
+                <!-- JS 자동 생성 -->
+              </tbody>
+            </table>
+          </div>
+
+          <footer class="data-summary-footer">
+            <div>* 1분 단위 평균 풍속 및 최대 돌풍풍속 데이터입니다. (Excel 호환 CSV 지원)</div>
+            <div class="stats-badges">
+              <span class="stat-badge">조회 건수: <strong id="statCount">0</strong>건</span>
+              <span class="stat-badge">최고 풍속: <strong id="statMax">0.0 m/s</strong></span>
+              <span class="stat-badge">평균 풍속: <strong id="statAvg">0.0 m/s</strong></span>
+            </div>
+          </footer>
+
+        </div>
+      </section>
+    </main>
+
+    <nav class="floating-page-dock" aria-label="화면 전환">
+      <a href="page1.html" class="dock-btn">1. 풍속 현황판</a>
+      <a href="page2.html" class="dock-btn active">2. 데이터 추출</a>
+      <a href="page3.html" class="dock-btn">3. 호출 시간 변경</a>
+      <div class="dock-divider"></div>
+      <button class="dock-fullscreen-btn" id="btnFullscreen" title="전체화면 (F11)">⛶</button>
+    </nav>
+
+    <div class="toast-msg" id="toastMsg" role="alert">
+      <span class="toast-pulse"></span>
+      <span id="toastText"></span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>풍속 현황판</title>
+  
+  <!-- SUIT Variable Font -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/suit@2/fonts/variable/woff2/SUIT-Variable.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Main Viewport (모니터 가로/세로 100% 완벽 피팅) -->
+    <main class="main-viewport">
+      
+      <!-- ================================================================= -->
+      <!-- PAGE 1: 풍속 현황판 (컬러 채움 디자인 & 모니터 100vh/100vw 피팅) -->
+      <!-- ================================================================= -->
+      <section class="page-view active" id="view-dashboard">
+        <div class="dashboard-frame">
+          
+          <!-- 상단 헤더: 타이틀 & 실시간 일시 -->
+          <div class="dashboard-header">
+            <div class="dashboard-title-wrap">
+              <div class="title-icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+                </svg>
+              </div>
+              <h1 class="dashboard-title">풍속 현황판</h1>
+            </div>
+            
+            <div class="dashboard-timestamp">
+              <span class="status-live-dot"></span>
+              <span id="dashTimestamp">2026년 10월 21일 10시 01분</span>
+            </div>
+          </div>
+
+          <!-- 메인 대시보드 그리드 (좌측: 현재 / 우측: 시간최대 & 일간최대) -->
+          <div class="dashboard-grid">
+            
+            <!-- 좌측 메인 카드: 현재 풍속 (Deep Azure Theme) -->
+            <article class="dash-card">
+              <header class="dash-card-header">현재</header>
+              <div class="dash-inner-box">
+                <div class="current-display-wrap">
+                  <span class="huge-value" id="valCurrent">8.4</span>
+                  <span class="huge-unit">m/s</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 우측 컬럼: 시간최대 & 일간최대 -->
+            <div class="dash-right-col">
+              
+              <!-- 시간최대 (Warm Amber Theme) -->
+              <article class="sub-card-hourly">
+                <header class="dash-card-header">시간최대</header>
+                <div class="dash-inner-box">
+                  <div class="sub-display-wrap">
+                    <span class="sub-value" id="valHourlyMax">18.9</span>
+                    <span class="sub-unit">m/s</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 일간최대 (Royal Indigo Theme) -->
+              <article class="sub-card-daily">
+                <header class="dash-card-header">일간최대</header>
+                <div class="dash-inner-box">
+                  <div class="sub-display-wrap">
+                    <span class="sub-value" id="valDailyMax">13.0</span>
+                    <span class="sub-unit">m/s</span>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- PAGE 2: 데이터 추출 (컬러 채움 테이블 & CSV 다운로드) -->
+      <!-- ================================================================= -->
+      <section class="page-view" id="view-data">
+        <div class="page-content-card">
+          
+          <div class="page-header-row">
+            <h1 class="page-main-title">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              데이터 추출
+            </h1>
+          </div>
+
+          <!-- 상단 검색 바 -->
+          <div class="page2-control-bar">
+            <div class="date-picker-wrap">
+              <span class="date-label">조회 일자:</span>
+              <input type="date" id="datePicker" class="custom-date-input" value="2026-10-21">
+            </div>
+            <div class="control-btn-group">
+              <button class="btn-action-green" id="btnQuery">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                조회
+              </button>
+              <button class="btn-action-download" id="btnDownload">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                다운로드
+              </button>
+            </div>
+          </div>
+
+          <!-- 데이터 테이블 -->
+          <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 36%;">시간</th>
+                  <th style="width: 32%;">풍속</th>
+                  <th style="width: 32%;">돌풍풍속</th>
+                </tr>
+              </thead>
+              <tbody id="dataTableBody">
+                <!-- JS 자동 생성 -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 하단 요약 -->
+          <footer class="data-summary-footer">
+            <div>* 1분 단위 평균 풍속 및 최대 돌풍풍속 데이터입니다. (Excel 호환 CSV 지원)</div>
+            <div class="stats-badges">
+              <span class="stat-badge">조회 건수: <strong id="statCount">0</strong>건</span>
+              <span class="stat-badge">최고 풍속: <strong id="statMax">0.0 m/s</strong></span>
+              <span class="stat-badge">평균 풍속: <strong id="statAvg">0.0 m/s</strong></span>
+            </div>
+          </footer>
+
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- PAGE 3: 호출 시간 변경 (컬러 카드 & 센서 제어) -->
+      <!-- ================================================================= -->
+      <section class="page-view" id="view-settings">
+        <div class="page-content-card">
+          
+          <div class="page-header-row">
+            <h1 class="page-main-title">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              호출 시간 변경
+            </h1>
+          </div>
+
+          <!-- 상단 컨트롤 바 -->
+          <div class="page3-control-bar">
+            <div class="date-picker-wrap">
+              <span class="date-label">설정 일자:</span>
+              <input type="date" id="settingDatePicker" class="custom-date-input" value="2026-10-21">
+            </div>
+            <button class="btn-action-green" id="btnApplySettingTop">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              호출 시간 변경
+            </button>
+          </div>
+
+          <!-- 설정 본문 카드 -->
+          <div class="settings-body">
+            
+            <!-- 카드 1: 호출 주기 설정 -->
+            <div class="setting-card">
+              <h2 class="setting-card-title">
+                <span>풍속 센서 호출 주기 설정</span>
+                <span class="setting-card-badge">실시간 반영</span>
+              </h2>
+
+              <div class="form-group">
+                <label class="form-label">호출 주기 간편 선택</label>
+                <p class="form-desc">관제 상황에 맞는 데이터 수집 주기를 선택하세요.</p>
+                <div class="preset-buttons">
+                  <button type="button" class="preset-btn" data-sec="1">1초 (실시간)</button>
+                  <button type="button" class="preset-btn active" data-sec="5">5초 (기본)</button>
+                  <button type="button" class="preset-btn" data-sec="10">10초</button>
+                  <button type="button" class="preset-btn" data-sec="30">30초</button>
+                  <button type="button" class="preset-btn" data-sec="60">1분</button>
+                  <button type="button" class="preset-btn" data-sec="300">5분</button>
+                  <button type="button" class="preset-btn" data-sec="600">10분</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="customSecInput">사용자 직접 입력 (초 단위)</label>
+                <div class="custom-input-row">
+                  <input type="number" id="customSecInput" class="text-input" min="1" max="3600" value="5" placeholder="초 단위 입력">
+                  <button type="button" class="btn-action-green" id="btnApplySettingCard">설정 저장 및 적용</button>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: auto;">
+                <label class="form-label">센서 통신 상태 확인</label>
+                <div class="custom-input-row">
+                  <button type="button" class="preset-btn" id="btnTestConn">통신 핑(Ping) 테스트</button>
+                  <span id="testConnBadge" style="font-size: 0.95rem; font-weight: 800; color: #02a499;">정상 (응답속도: 14ms)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 카드 2: 운영 상태 -->
+            <div class="setting-card">
+              <h2 class="setting-card-title">
+                <span>호출 동작 현황</span>
+                <span class="setting-card-badge">운영 상태</span>
+              </h2>
+
+              <div class="status-info-list">
+                <div class="status-info-item">
+                  <span>현재 적용된 호출 주기</span>
+                  <span id="currIntervalDisplay">5초</span>
+                </div>
+                <div class="status-info-item">
+                  <span>다음 호출 예정</span>
+                  <span id="nextCallCountdownDisplay">5초 후</span>
+                </div>
+                <div class="status-info-item">
+                  <span>최근 호출 성공 시간</span>
+                  <span id="lastCallTimeDisplay">--:--:--</span>
+                </div>
+                <div class="status-info-item">
+                  <span>통신 프로토콜</span>
+                  <span>Modbus-RTU / RS-485</span>
+                </div>
+                <div class="status-info-item">
+                  <span>연결 포트</span>
+                  <span>COM3 (9600 bps)</span>
+                </div>
+                <div class="status-info-item">
+                  <span>데이터 수신율</span>
+                  <span style="color: #02a499;">100.0% (정상)</span>
+                </div>
+              </div>
+
+              <div class="setting-notice-box">
+                💡 <strong>안내</strong>: 호출 주기를 변경하면 첫 번째 화면인 <strong>[풍속 현황판]</strong>의 데이터 갱신 타이머가 즉시 변경된 주기에 동기화됩니다.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 화면 우측 하단 미니멀 플로팅 독 (전광판 화면을 방해하지 않는 25% 반투명) -->
+    <nav class="floating-page-dock" aria-label="화면 전환">
+      <button class="dock-btn active" data-page="dashboard" title="단축키: 1">1. 풍속 현황판</button>
+      <button class="dock-btn" data-page="data" title="단축키: 2">2. 데이터 추출</button>
+      <button class="dock-btn" data-page="settings" title="단축키: 3">3. 호출 시간 변경</button>
+      <div class="dock-divider"></div>
+      <button class="dock-fullscreen-btn" id="btnFullscreen" title="전체화면 (F11)">⛶</button>
+    </nav>
+
+    <!-- 피드백 토스트 -->
+    <div class="toast-msg" id="toastMsg" role="alert">
+      <span class="toast-pulse"></span>
+      <span id="toastText">설정이 완료되었습니다.</span>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1095 @@
+@charset "UTF-8";
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/suit@2/fonts/variable/woff2/SUIT-Variable.css');
+
+/* ==========================================================================
+   풍속 모니터링 시스템 (Wind Speed Monitoring System)
+   - Veltrix High-End Dark Admin Dashboard Aesthetic
+   - Deep Navy-Slate (#222736, #2a3042, #2e3548)
+   - Accent Purple (#626ed4) & Vibrant Cyan/Teal (#02a499)
+   - 모니터 해상도 완벽 100vh/100vw 피팅 (기존 콘텐츠 및 구조 100% 보존)
+   ========================================================================== */
+
+:root {
+  /* Veltrix Dark Palette */
+  --bg-page: #222736;
+  --bg-frame: #2a3042;
+  --bg-card: #2e3548;
+  --bg-inner: #222736;
+  
+  /* Precision Dark Borders */
+  --border-outer: #32394e;
+  --border-subtle: #32394e;
+  --border-light: rgba(255, 255, 255, 0.08);
+
+  /* Typography */
+  --text-title: #ffffff;
+  --text-main: #c3cbe4;
+  --text-sub: #74788d;
+  --text-muted: #626880;
+
+  /* Card 1: 현재 (Current Wind) - High-End Royal Indigo / Purple Jewel Gradient */
+  --curr-card-bg: #2e3548;
+  --curr-card-border: #32394e;
+  --curr-header-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(0, 0, 0, 0.12) 100%), linear-gradient(135deg, #4f46e5 0%, #6366f1 28%, #7c3aed 65%, #9333ea 100%);
+  --curr-header-text: #ffffff;
+  --curr-box-bg: #222736;
+  --curr-box-border: #32394e;
+  --curr-val-color: #ffffff;
+  --curr-unit-color: #02a499;
+  --curr-badge-bg: rgba(2, 164, 153, 0.15);
+  --curr-badge-text: #02a499;
+
+  /* Card 2: 시간최대 (Hourly Max) - Radiant Sunset Gold & Amber Coral Gradient */
+  --hour-card-bg: #2e3548;
+  --hour-card-border: #32394e;
+  --hour-header-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.14) 100%), linear-gradient(135deg, #c97a06 0%, #e69512 25%, #f1b44c 60%, #fa7533 100%);
+  --hour-header-text: #ffffff;
+  --hour-box-bg: #222736;
+  --hour-box-border: #32394e;
+  --hour-val-color: #ffffff;
+  --hour-unit-color: #f1b44c;
+  --hour-badge-bg: rgba(241, 180, 76, 0.15);
+  --hour-badge-text: #f1b44c;
+
+  /* Card 3: 일간최대 (Daily Max) - Deep Sapphire & Azure Royal Gradient */
+  --day-card-bg: #2e3548;
+  --day-card-border: #32394e;
+  --day-header-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(0, 0, 0, 0.12) 100%), linear-gradient(135deg, #1d4ed8 0%, #2563eb 28%, #4f46e5 65%, #7c3aed 100%);
+  --day-header-text: #ffffff;
+  --day-box-bg: #222736;
+  --day-box-border: #32394e;
+  --day-val-color: #ffffff;
+  --day-unit-color: #7a88ef;
+  --day-badge-bg: rgba(98, 110, 212, 0.15);
+  --day-badge-text: #9aa5f7;
+
+  /* Action Buttons (Veltrix Teal & Purple) */
+  --btn-green-bg: linear-gradient(135deg, #02a499 0%, #01837a 100%);
+  --btn-green-border: #028e84;
+  --btn-download-bg: linear-gradient(135deg, #626ed4 0%, #505cbe 100%);
+  --btn-download-border: #505cbe;
+
+  /* Fonts */
+  --font-main: 'SUIT Variable', 'SUIT', -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif;
+  --font-num: 'SUIT Variable', 'SUIT', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Sleek Dark Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+::-webkit-scrollbar-thumb {
+  background: #32394e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #404862;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bg-page);
+}
+
+.main-viewport {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.page-view {
+  display: none;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.page-view.active {
+  display: flex;
+  flex-direction: column;
+  animation: fadeInView 0.25s ease;
+}
+
+@keyframes fadeInView {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   PAGE 1: 풍속 현황판 (모니터 가로/세로 100% 피팅, Veltrix 다크 디자인)
+   ========================================================================== */
+#view-dashboard {
+  padding: 1.4vh 1.8vw 1.8vh 1.8vw;
+  background: var(--bg-page);
+}
+
+/* 전광판 메인 프레임 (Veltrix High-End Dark Frame with Gradient & Ambient Glow) */
+.dashboard-frame {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  background: 
+    radial-gradient(120% 70% at 50% 0%, rgba(98, 110, 212, 0.22) 0%, rgba(98, 110, 212, 0.05) 45%, transparent 75%),
+    linear-gradient(155deg, #323950 0%, #292f42 35%, #242939 70%, #1c202d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 1.4vh 1.8vw 1.6vh 1.8vw;
+  box-shadow: 
+    0 1rem 3rem rgba(10, 12, 20, 0.65), 
+    0 0 50px rgba(98, 110, 212, 0.12),
+    inset 0 1px 2px rgba(255, 255, 255, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 상단 타이틀 영역 (가운데 정렬 & 날짜 아랫줄 왼쪽 정렬) */
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 0.8vh;
+  padding-bottom: 0.6vh;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  gap: 0.4vh;
+}
+
+.dashboard-title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1.1rem;
+}
+
+.title-icon-badge {
+  width: clamp(2.4rem, 3.4vw, 5.2vh);
+  height: clamp(2.4rem, 3.4vw, 5.2vh);
+  background: transparent;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7c88f4;
+  box-shadow: none;
+  filter: drop-shadow(0 0 12px rgba(124, 136, 244, 0.65));
+}
+
+.title-icon-badge svg {
+  width: 100%;
+  height: 100%;
+  animation: iconSpin 6s linear infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+@keyframes iconSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dashboard-title {
+  font-size: clamp(2.2rem, 3.8vw, 5.8vh);
+  font-weight: 900;
+  color: var(--text-title);
+  line-height: 1.15;
+  margin: 0;
+  text-align: center;
+}
+
+.dashboard-timestamp {
+  align-self: flex-start;
+  font-size: clamp(0.85rem, 1.15vw, 1.85vh);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  background: var(--bg-inner);
+  border: 1px solid var(--border-outer);
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-top: 0.2vh;
+}
+
+.status-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #02a499;
+  box-shadow: 0 0 10px #02a499;
+  animation: pulseLive 2s infinite;
+}
+
+@keyframes pulseLive {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+/* 대시보드 2열 그리드 */
+.dashboard-grid {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 2.15fr 1fr;
+  gap: 1.6vw;
+}
+
+/* 좌측 메인 카드: 현재 (상단 라인 제거 & 타이틀 여백 및 그라데이션 대폭 강화) */
+.dash-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--curr-card-border);
+  border-radius: 14px;
+  background: var(--curr-card-bg);
+  padding: 1vh 1.2vw 1.2vh 1.2vw;
+  min-height: 0;
+  box-shadow: 0 8px 24px rgba(18, 21, 31, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-card-header {
+  font-size: clamp(2.4rem, 3.6vw, 5.6vh);
+  font-weight: 900;
+  text-align: center;
+  color: var(--curr-header-text);
+  background: #2D70BA;
+  padding: 2.1vh 2.4vw;
+  border-radius: 12px;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.1vh;
+  flex-shrink: 0;
+}
+
+.dash-inner-box {
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--curr-box-border);
+  border-radius: 10px;
+  background: var(--curr-box-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0.4vh 1vw;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.current-display-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+}
+
+.huge-value {
+  font-size: clamp(5.4rem, 15vw, 25vh);
+  font-weight: 800;
+  font-family: var(--font-num);
+  line-height: 0.88;
+  color: var(--curr-val-color);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 25px rgba(98, 110, 212, 0.35);
+}
+
+.huge-unit {
+  font-size: clamp(1.8rem, 3.8vw, 6.5vh);
+  font-weight: 700;
+  font-family: var(--font-num);
+  color: var(--curr-unit-color);
+  margin-left: clamp(0.6rem, 1.4vw, 2.2rem);
+  transform: translateY(-0.6vh);
+  text-shadow: 0 0 15px rgba(2, 164, 153, 0.4);
+}
+
+.card-status-chip {
+  margin-top: 0.6vh;
+  font-size: clamp(0.85rem, 1.1vw, 1.8vh);
+  font-weight: 700;
+  padding: 0.3rem 0.9rem;
+  border-radius: 20px;
+  background: var(--curr-badge-bg);
+  color: var(--curr-badge-text);
+  border: 1px solid rgba(2, 164, 153, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* 우측 컬럼: 시간최대 & 일간최대 */
+.dash-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3vh;
+  min-height: 0;
+}
+
+/* 시간최대 카드 (상단 라인 제거 & 타이틀 여백 및 그라데이션 강화) */
+.sub-card-hourly {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--hour-card-border);
+  border-radius: 14px;
+  background: var(--hour-card-bg);
+  padding: 0.8vh 1.1vw 0.9vh 1.1vw;
+  box-shadow: 0 6px 18px rgba(18, 21, 31, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.sub-card-hourly .dash-card-header {
+  font-size: clamp(1.8rem, 2.7vw, 4.4vh);
+  font-weight: 900;
+  color: var(--hour-header-text);
+  background: #4CA7A9;
+  padding: 1.6vh 2vw;
+  border-radius: 11px;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8vh;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sub-card-hourly .dash-inner-box {
+  border: 1px solid var(--hour-box-border);
+  border-radius: 10px;
+  background: var(--hour-box-bg);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.sub-card-hourly .sub-value {
+  color: var(--hour-val-color);
+  text-shadow: 0 0 20px rgba(241, 180, 76, 0.3);
+}
+
+.sub-card-hourly .sub-unit {
+  color: var(--hour-unit-color);
+}
+
+.sub-card-hourly .card-status-chip {
+  background: var(--hour-badge-bg);
+  color: var(--hour-badge-text);
+  border-color: rgba(241, 180, 76, 0.35);
+}
+
+/* 일간최대 카드 (상단 라인 제거 & 타이틀 여백 및 그라데이션 강화) */
+.sub-card-daily {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--day-card-border);
+  border-radius: 14px;
+  background: var(--day-card-bg);
+  padding: 0.8vh 1.1vw 0.9vh 1.1vw;
+  box-shadow: 0 6px 18px rgba(18, 21, 31, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.sub-card-daily .dash-card-header {
+  font-size: clamp(1.8rem, 2.7vw, 4.4vh);
+  font-weight: 900;
+  color: var(--day-header-text);
+  background: #D45A69;
+  padding: 1.6vh 2vw;
+  border-radius: 11px;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8vh;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sub-card-daily .dash-inner-box {
+  border: 1px solid var(--day-box-border);
+  background: var(--day-box-bg);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.sub-card-daily .sub-value {
+  color: var(--day-val-color);
+  text-shadow: 0 0 20px rgba(98, 110, 212, 0.3);
+}
+
+.sub-card-daily .sub-unit {
+  color: var(--day-unit-color);
+}
+
+.sub-card-daily .card-status-chip {
+  background: var(--day-badge-bg);
+  color: var(--day-badge-text);
+  border-color: rgba(98, 110, 212, 0.35);
+}
+
+.sub-display-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.sub-value {
+  font-size: clamp(3.2rem, 7.5vw, 12vh);
+  font-weight: 800;
+  font-family: var(--font-num);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.sub-unit {
+  font-size: clamp(1.2rem, 2vw, 3.4vh);
+  font-weight: 700;
+  font-family: var(--font-num);
+  margin-left: clamp(0.4rem, 0.8vw, 1.2rem);
+}
+
+/* ==========================================================================
+   PAGE 2: 데이터 추출 (Veltrix Dark Table & CSV 다운로드)
+   ========================================================================== */
+#view-data {
+  padding: 1.4vh 1.8vw 1.8vh 1.8vw;
+  background: var(--bg-page);
+}
+
+/* 페이지 메인 콘텐츠 카드 (Veltrix High-End Dark Frame with Gradient & Ambient Glow) */
+.page-content-card {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  background: 
+    radial-gradient(120% 70% at 50% 0%, rgba(98, 110, 212, 0.22) 0%, rgba(98, 110, 212, 0.05) 45%, transparent 75%),
+    linear-gradient(155deg, #323950 0%, #292f42 35%, #242939 70%, #1c202d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 1.4vh 1.8vw 1.6vh 1.8vw;
+  box-shadow: 
+    0 1rem 3rem rgba(10, 12, 20, 0.65), 
+    0 0 50px rgba(98, 110, 212, 0.12),
+    inset 0 1px 2px rgba(255, 255, 255, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2vh;
+  padding-bottom: 0.8vh;
+  flex-shrink: 0;
+}
+
+.page-main-title {
+  font-size: clamp(1.8rem, 2.6vw, 4.4vh);
+  font-weight: 800;
+  color: var(--text-title);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.page-main-title svg {
+  stroke: #7c88f4;
+  filter: drop-shadow(0 0 8px rgba(124, 136, 244, 0.5));
+}
+
+/* Control Bar */
+.page2-control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-inner);
+  border: 1px solid var(--border-outer);
+  border-radius: 8px;
+  padding: 0.9vh 1.4vw;
+  margin-bottom: 1.4vh;
+  flex-shrink: 0;
+}
+
+.date-picker-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.date-label {
+  font-size: clamp(0.85rem, 1vw, 1.6vh);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.custom-date-input {
+  border: 1px solid var(--border-outer);
+  background: var(--bg-card);
+  color: var(--text-title);
+  font-family: var(--font-num);
+  font-size: clamp(0.95rem, 1.15vw, 1.9vh);
+  font-weight: 700;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.15s ease;
+  color-scheme: dark;
+}
+
+.custom-date-input:focus {
+  border-color: #626ed4;
+  box-shadow: 0 0 0 3px rgba(98, 110, 212, 0.25);
+}
+
+.custom-date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.custom-date-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.control-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+/* Color Filled Action Buttons (Teal & Purple) */
+.btn-action-green {
+  background: var(--btn-green-bg);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-main);
+  font-size: clamp(0.9rem, 1.1vw, 1.8vh);
+  font-weight: 700;
+  padding: 0.5rem 1.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(2, 164, 153, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.btn-action-green:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(2, 164, 153, 0.45);
+}
+
+.btn-action-green:active {
+  transform: translateY(1px);
+}
+
+.btn-action-download {
+  background: var(--btn-download-bg);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-main);
+  font-size: clamp(0.9rem, 1.1vw, 1.8vh);
+  font-weight: 700;
+  padding: 0.5rem 1.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(98, 110, 212, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.btn-action-download:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(98, 110, 212, 0.45);
+}
+
+.btn-action-download:active {
+  transform: translateY(1px);
+}
+
+/* Data Table Container (Veltrix Dark Table) */
+.data-table-container {
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--border-outer);
+  border-radius: 8px;
+  background: var(--bg-inner);
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: var(--font-num);
+}
+
+.data-table thead {
+  position: sticky;
+  top: 0;
+  background: var(--bg-inner);
+  z-index: 10;
+}
+
+.data-table th {
+  border-bottom: 2px solid var(--border-outer);
+  border-right: 1px solid var(--border-outer);
+  font-size: clamp(0.95rem, 1.2vw, 2vh);
+  font-weight: 800;
+  color: var(--text-title);
+  padding: 1vh 1vw;
+  letter-spacing: 0.05em;
+  background: #252b3b;
+}
+
+.data-table th:last-child {
+  border-right: none;
+}
+
+.data-table td {
+  border-bottom: 1px solid var(--border-outer);
+  border-right: 1px solid var(--border-outer);
+  font-size: clamp(0.9rem, 1.15vw, 1.85vh);
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 0.75vh 1vw;
+}
+
+.data-table td:last-child {
+  border-right: none;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.015);
+}
+
+.data-table tbody tr:hover {
+  background-color: #32394e !important;
+}
+
+/* Value Chips inside table cells */
+.val-pill-blue {
+  display: inline-block;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  font-weight: 700;
+  padding: 0.2rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.val-pill-amber {
+  display: inline-block;
+  background: rgba(241, 180, 76, 0.15);
+  color: #f1b44c;
+  font-weight: 700;
+  padding: 0.2rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(241, 180, 76, 0.35);
+}
+
+/* Scrollbar */
+.data-table-container::-webkit-scrollbar {
+  width: 10px;
+  background: var(--bg-inner);
+  border-left: 1px solid var(--border-outer);
+}
+
+.data-table-container::-webkit-scrollbar-thumb {
+  background: #32394e;
+  border-radius: 4px;
+}
+
+.data-table-container::-webkit-scrollbar-thumb:hover {
+  background: #404862;
+}
+
+/* Summary Footer */
+.data-summary-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.2vh;
+  font-size: clamp(0.82rem, 1vw, 1.6vh);
+  color: var(--text-sub);
+  flex-shrink: 0;
+}
+
+.stats-badges {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat-badge {
+  background: var(--bg-inner);
+  border: 1px solid var(--border-outer);
+  padding: 0.35rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.stat-badge strong {
+  color: #02a499;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   PAGE 3: 호출 시간 변경 (Veltrix Dark Settings & Form Design)
+   ========================================================================== */
+#view-settings {
+  padding: 1.4vh 1.8vw 1.8vh 1.8vw;
+  background: var(--bg-page);
+}
+
+.page3-control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-inner);
+  border: 1px solid var(--border-outer);
+  border-radius: 8px;
+  padding: 0.9vh 1.4vw;
+  margin-bottom: 1.6vh;
+  flex-shrink: 0;
+}
+
+.settings-body {
+  display: none !important;
+}
+
+.setting-card {
+  border: 1px solid var(--border-outer);
+  border-radius: 12px;
+  background: var(--bg-card);
+  padding: 2.2vh 1.8vw;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(18, 21, 31, 0.35);
+}
+
+.setting-card-title {
+  font-size: clamp(1.2rem, 1.5vw, 2.6vh);
+  font-weight: 800;
+  color: var(--text-title);
+  border-bottom: 1px solid var(--border-outer);
+  padding-bottom: 1.2vh;
+  margin-bottom: 1.8vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.setting-card-badge {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(98, 110, 212, 0.16);
+  color: #626ed4;
+  border: 1px solid rgba(98, 110, 212, 0.35);
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.form-group {
+  margin-bottom: 1.8vh;
+}
+
+.form-label {
+  display: block;
+  font-size: clamp(0.92rem, 1.15vw, 1.9vh);
+  font-weight: 700;
+  color: var(--text-title);
+  margin-bottom: 0.6vh;
+}
+
+.form-desc {
+  font-size: clamp(0.78rem, 0.95vw, 1.5vh);
+  color: var(--text-sub);
+  margin-bottom: 1vh;
+}
+
+.preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-bottom: 0.8vh;
+}
+
+.preset-btn {
+  background: var(--bg-inner);
+  border: 1px solid var(--border-outer);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  font-size: clamp(0.85rem, 1.05vw, 1.7vh);
+  font-weight: 700;
+  padding: 0.55rem 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-btn:hover {
+  border-color: #626ed4;
+  background: #32394e;
+  color: #ffffff;
+}
+
+.preset-btn.active {
+  background: linear-gradient(135deg, #626ed4 0%, #505cbe 100%);
+  color: #ffffff;
+  border-color: #505cbe;
+  box-shadow: 0 4px 12px rgba(98, 110, 212, 0.4);
+}
+
+.custom-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.text-input {
+  border: 1px solid var(--border-outer);
+  background: var(--bg-inner);
+  color: var(--text-title);
+  font-size: clamp(0.95rem, 1.15vw, 1.9vh);
+  font-family: var(--font-num);
+  font-weight: 700;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  outline: none;
+  flex: 1;
+  transition: border-color 0.15s ease;
+}
+
+.text-input:focus {
+  border-color: #626ed4;
+  box-shadow: 0 0 0 3px rgba(98, 110, 212, 0.25);
+}
+
+.status-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1vh;
+  margin-top: 0.5vh;
+}
+
+.status-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vh 1.4vw;
+  background: var(--bg-inner);
+  border: 1px solid var(--border-outer);
+  border-left: 4px solid #626ed4;
+  border-radius: 6px;
+  font-size: clamp(0.85rem, 1.05vw, 1.75vh);
+}
+
+.status-info-item:nth-child(2) {
+  border-left-color: #f1b44c;
+}
+
+.status-info-item:nth-child(3) {
+  border-left-color: #02a499;
+}
+
+.status-info-item span:first-child {
+  color: var(--text-sub);
+  font-weight: 600;
+}
+
+.status-info-item span:last-child {
+  font-weight: 800;
+  color: var(--text-title);
+  font-family: var(--font-num);
+}
+
+.setting-notice-box {
+  margin-top: auto;
+  padding: 1.4vh 1.4vw;
+  background: rgba(98, 110, 212, 0.08);
+  border: 1px solid rgba(98, 110, 212, 0.25);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #c3cbe4;
+  line-height: 1.5;
+}
+
+.setting-notice-box strong {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   MINIMAL FLOATING DOCK (Veltrix Dark Glassmorphism)
+   ========================================================================== */
+.floating-page-dock {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  background: rgba(38, 43, 60, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 4px 6px;
+  border-radius: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border-outer);
+  opacity: 0.35;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.floating-page-dock:hover {
+  opacity: 1;
+  transform: translateY(2px);
+}
+
+.dock-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-family: var(--font-main);
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.dock-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dock-btn.active {
+  background: linear-gradient(135deg, #626ed4 0%, #505cbe 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(98, 110, 212, 0.4);
+}
+
+.dock-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--border-outer);
+  margin: 0 3px;
+}
+
+.dock-fullscreen-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-sub);
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.dock-fullscreen-btn:hover {
+  color: #ffffff;
+}
+
+/* Toast Message */
+.toast-msg {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #2a3042;
+  color: #ffffff;
+  padding: 0.85rem 1.8rem;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 9999;
+  border: 1px solid var(--border-outer);
+}
+
+.toast-msg.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.toast-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #02a499;
+  box-shadow: 0 0 10px #02a499;
+}

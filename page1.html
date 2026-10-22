@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>풍속 현황판</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/suit@2/fonts/variable/woff2/SUIT-Variable.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <main class="main-viewport">
+      <section class="page-view active" id="view-dashboard">
+        <div class="dashboard-frame">
+          
+          <div class="dashboard-header">
+            <div class="dashboard-title-wrap">
+              <div class="title-icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+                </svg>
+              </div>
+              <h1 class="dashboard-title">풍속 현황판</h1>
+            </div>
+            
+            <div class="dashboard-timestamp">
+              <span class="status-live-dot"></span>
+              <span id="dashTimestamp">2026년 10월 21일 10시 01분</span>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="dash-card">
+              <header class="dash-card-header">현재</header>
+              <div class="dash-inner-box">
+                <div class="current-display-wrap">
+                  <span class="huge-value" id="valCurrent">8.4</span>
+                  <span class="huge-unit">m/s</span>
+                </div>
+              </div>
+            </article>
+
+            <div class="dash-right-col">
+              <article class="sub-card-hourly">
+                <header class="dash-card-header">시간최대</header>
+                <div class="dash-inner-box">
+                  <div class="sub-display-wrap">
+                    <span class="sub-value" id="valHourlyMax">18.9</span>
+                    <span class="sub-unit">m/s</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="sub-card-daily">
+                <header class="dash-card-header">일간최대</header>
+                <div class="dash-inner-box">
+                  <div class="sub-display-wrap">
+                    <span class="sub-value" id="valDailyMax">13.0</span>
+                    <span class="sub-unit">m/s</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <nav class="floating-page-dock" aria-label="화면 전환">
+      <a href="page1.html" class="dock-btn active">1. 풍속 현황판</a>
+      <a href="page2.html" class="dock-btn">2. 데이터 추출</a>
+      <a href="page3.html" class="dock-btn">3. 호출 시간 변경</a>
+      <div class="dock-divider"></div>
+      <button class="dock-fullscreen-btn" id="btnFullscreen" title="전체화면 (F11)">⛶</button>
+    </nav>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
