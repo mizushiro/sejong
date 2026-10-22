@@ -273,12 +273,7 @@ html, body {
 .dash-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--curr-card-border);
-  border-radius: 14px;
-  background: var(--curr-card-bg);
-  padding: 1vh 1.2vw 1.2vh 1.2vw;
   min-height: 0;
-  box-shadow: 0 8px 24px rgba(18, 21, 31, 0.35);
   position: relative;
   overflow: hidden;
 }
@@ -290,25 +285,72 @@ html, body {
   color: var(--curr-header-text);
   background: #2D70BA;
   padding: 2.1vh 2.4vw;
-  border-radius: 12px;
+  border-radius: .8rem .8rem 0 0;
   letter-spacing: 0.05em;
-  margin-bottom: 1.1vh;
   flex-shrink: 0;
 }
 
 .dash-inner-box {
   flex: 1;
   min-height: 0;
-  border: 1px solid var(--curr-box-border);
-  border-radius: 10px;
-  background: var(--curr-box-bg);
+  border-radius: 0 0 .8rem .8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
   padding: 0.4vh 1vw;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 14px 28px rgba(0, 0, 0, 0.55),
+    inset 0 -14px 28px rgba(0, 0, 0, 0.5),
+    0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 상단 헤더와의 경계선: 은은한 수평 림 라이트 (Rim Light Bar) */
+.dash-inner-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 6%;
+  right: 6%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 하이테크 마이크로 도트 패턴 (단조로운 단색감을 없애고 첨단 정밀 계측 대시보드 질감 부여) */
+.dash-inner-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 18px 18px;
+  background-position: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* [박스 1] 좌측 메인 카드: 현재 풍속 (Deep Sapphire & Midnight Navy) */
+.dash-card .dash-inner-box {
+  border: 1px solid rgba(45, 112, 186, 0.45);
+  border-top: none;
+  background: 
+    radial-gradient(circle at 50% 12%, rgba(45, 112, 186, 0.28) 0%, rgba(30, 75, 138, 0.12) 42%, transparent 72%),
+    radial-gradient(circle at 90% 90%, rgba(45, 112, 186, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #182030 0%, #121724 45%, #0d101a 100%);
+}
+
+.dash-card:hover .dash-inner-box {
+  border-color: rgba(45, 112, 186, 0.7);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 14px 28px rgba(0, 0, 0, 0.55),
+    inset 0 0 35px rgba(45, 112, 186, 0.2),
+    0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .current-display-wrap {
@@ -316,6 +358,8 @@ html, body {
   align-items: baseline;
   justify-content: center;
   width: 100%;
+  position: relative;
+  z-index: 3;
 }
 
 .huge-value {
@@ -360,48 +404,53 @@ html, body {
   min-height: 0;
 }
 
-/* 시간최대 카드 (상단 라인 제거 & 타이틀 여백 및 그라데이션 강화) */
+/* [박스 2] 우측 상단 카드: 시간최대 풍속 (Deep Emerald & Dark Teal) */
 .sub-card-hourly {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--hour-card-border);
-  border-radius: 14px;
-  background: var(--hour-card-bg);
-  padding: 0.8vh 1.1vw 0.9vh 1.1vw;
-  box-shadow: 0 6px 18px rgba(18, 21, 31, 0.3);
   position: relative;
   overflow: hidden;
 }
 
 .sub-card-hourly .dash-card-header {
-  font-size: clamp(1.8rem, 2.7vw, 4.4vh);
+  font-size: clamp(2.4rem, 3.6vw, 5.6vh);
   font-weight: 900;
   color: var(--hour-header-text);
-  background: #4CA7A9;
-  padding: 1.6vh 2vw;
-  border-radius: 11px;
+  background: #02a499;
+  padding: 2.1vh 2.4vw;
+  border-radius: .8rem .8rem 0 0;
   letter-spacing: 0.05em;
-  margin-bottom: 0.8vh;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .sub-card-hourly .dash-inner-box {
-  border: 1px solid var(--hour-box-border);
-  border-radius: 10px;
-  background: var(--hour-box-bg);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(2, 164, 153, 0.45);
+  border-top: none;
+  background: 
+    radial-gradient(circle at 50% 12%, rgba(2, 164, 153, 0.26) 0%, rgba(1, 131, 122, 0.11) 42%, transparent 72%),
+    radial-gradient(circle at 90% 90%, rgba(2, 164, 153, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #132426 0%, #0e1c1d 45%, #091314 100%);
+}
+
+.sub-card-hourly:hover .dash-inner-box {
+  border-color: rgba(2, 164, 153, 0.7);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 14px 28px rgba(0, 0, 0, 0.55),
+    inset 0 0 35px rgba(2, 164, 153, 0.2),
+    0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .sub-card-hourly .sub-value {
   color: var(--hour-val-color);
-  text-shadow: 0 0 20px rgba(241, 180, 76, 0.3);
+  text-shadow: 0 0 22px rgba(2, 164, 153, 0.45), 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .sub-card-hourly .sub-unit {
-  color: #4CA7A9;
+  color: #02a499;
 }
 
 .sub-card-hourly .card-status-chip {
@@ -410,43 +459,49 @@ html, body {
   border-color: rgba(241, 180, 76, 0.35);
 }
 
-/* 일간최대 카드 (상단 라인 제거 & 타이틀 여백 및 그라데이션 강화) */
+/* [박스 3] 우측 하단 카드: 일간최대 풍속 (Deep Ruby & Dark Crimson) */
 .sub-card-daily {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--day-card-border);
-  border-radius: 14px;
-  background: var(--day-card-bg);
-  padding: 0.8vh 1.1vw 0.9vh 1.1vw;
-  box-shadow: 0 6px 18px rgba(18, 21, 31, 0.3);
   position: relative;
   overflow: hidden;
 }
 
 .sub-card-daily .dash-card-header {
-  font-size: clamp(1.8rem, 2.7vw, 4.4vh);
+  font-size: clamp(2.4rem, 3.6vw, 5.6vh);
   font-weight: 900;
   color: var(--day-header-text);
   background: #D45A69;
-  padding: 1.6vh 2vw;
-  border-radius: 11px;
+  padding: 2.1vh 2.4vw;
+  border-radius: .8rem .8rem 0 0;
   letter-spacing: 0.05em;
-  margin-bottom: 0.8vh;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .sub-card-daily .dash-inner-box {
-  border: 1px solid var(--day-box-border);
-  background: var(--day-box-bg);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(212, 90, 105, 0.45);
+  border-top: none;
+  background: 
+    radial-gradient(circle at 50% 12%, rgba(212, 90, 105, 0.25) 0%, rgba(168, 50, 68, 0.11) 42%, transparent 72%),
+    radial-gradient(circle at 90% 90%, rgba(212, 90, 105, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #25161c 0%, #1c0f14 45%, #130a0e 100%);
+}
+
+.sub-card-daily:hover .dash-inner-box {
+  border-color: rgba(212, 90, 105, 0.7);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 14px 28px rgba(0, 0, 0, 0.55),
+    inset 0 0 35px rgba(212, 90, 105, 0.2),
+    0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .sub-card-daily .sub-value {
   color: var(--day-val-color);
-  text-shadow: 0 0 20px rgba(98, 110, 212, 0.3);
+  text-shadow: 0 0 22px rgba(212, 90, 105, 0.45), 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .sub-card-daily .sub-unit {
@@ -463,6 +518,8 @@ html, body {
   display: flex;
   align-items: baseline;
   justify-content: center;
+  position: relative;
+  z-index: 3;
 }
 
 .sub-value {
